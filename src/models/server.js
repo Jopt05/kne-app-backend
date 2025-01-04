@@ -10,6 +10,7 @@ class Server {
 
         this.usersRoutePath = '/api/users';
         this.authRoutePath = '/api/auth';
+        this.twitchRoutePath = '/api/twitch';
 
         this.connect();
         this.middlewares();
@@ -24,6 +25,7 @@ class Server {
     routes() {
         this.app.use(this.usersRoutePath, require('../routes/users'));
         this.app.use(this.authRoutePath, require('../routes/auth'));
+        this.app.use(this.twitchRoutePath, require('../routes/twitch'));
     }
 
     async connect() {
