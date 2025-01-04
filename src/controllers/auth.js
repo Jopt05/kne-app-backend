@@ -35,7 +35,7 @@ const login = async(req, res) => {
     const token = await generateJwt(user.id, user.email);
 
     return generateResponse(200, 'User logged in successfully', {
-        ...user,
+        ...user.dataValues,
         token
     }, res)
 }
