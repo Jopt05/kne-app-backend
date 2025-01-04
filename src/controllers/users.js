@@ -6,7 +6,11 @@ const getMe = async(req, res = response) => {
     
     const { email } = req.locals;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+        where: {
+            email
+        }
+    });
 
     if (!user) {
         return generateResponse(400, 'User not found', null, res)
