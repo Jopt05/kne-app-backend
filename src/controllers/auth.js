@@ -14,6 +14,7 @@ const createUser = async(req, res) => {
     const token = await generateJwt(user.id, user.email);
 
     return generateResponse(200, 'User created successfully', {
+        ...user.dataValues,
         token
     }, res)
 }
