@@ -45,8 +45,6 @@ const validateJwt = (req, res, next) => {
     } catch (error) {
         return generateResponse(401, 'Token invalid', null, res);
     }
-
-    next();
 }
 
 module.exports = {

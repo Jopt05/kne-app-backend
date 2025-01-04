@@ -1,8 +1,12 @@
 const { Router } = require('express');
-const { getUsers } = require('../controllers/users');
+const { getMe } = require('../controllers/users');
+const { validateJwt } = require('../utils/token');
 
 const router = Router();
 
-router.get('/', getUsers);
+router.get('/me', [
+    validateJwt,
+]
+, getMe);
 
 module.exports = router;
