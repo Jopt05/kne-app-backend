@@ -29,6 +29,24 @@ const getStreamInfo = async(req, res = response) => {
     }, res);
 }
 
+const getLastGames = async(req, res = response) => {
+    const token = await getNewToken();
+    if( !token ) return generateResponse(500, 'Error getting token', null, res);
+
+    const response = await axios.get(`${process.env.TWITCH_API_URL}/videos?user_id=${process.env.KNEKRO_BROADCASTER_ID}&first=21`, {
+        headers: {
+            'Client-Id': process.env.TWITCH_CLIENT_ID,
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    if( response.status != 200 ) return generateResponse(500, 'Error getting streams info', null, res);
+
+    return generateResponse(200, 'Obtained successfully', {
+        streams: response.data.data[0]
+    }, res);
+}
+
 module.exports = {
-    getStreamInfo
+    getStreamInfo,
+    getLastGames
 }
